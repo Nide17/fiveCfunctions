@@ -22,12 +22,12 @@ __void reverse_in_place(char *str)__
  * Reverses a null-terminated string in place, converting it to all lower case in the process.
 
 - Examples:  
- "Carnegie Mellon"	"nollem eigenrac"  
- "Four"             "ruof"  
- " One"             "eno "  
+ "Carnegie Mellon"	-> "nollem eigenrac"  
+ "Four" ->             "ruof"  
+ " One" ->             "eno "  
 
 - Parameters:  
-  str        A null terminated string to reverse  
+  str :                A null terminated string to reverse  
 
 - Returns:  
   None  
@@ -41,14 +41,14 @@ __void reverse_by_word(char *str)__
  * Whitespace characters (as identified by the C isspace() function) are passed through unchanged.
 
 - Examples:  
-"Carnegie Mellon"               "eigenraC nolleM"  
-"\tCarnegie  Mellon "           "\teigenraC  nolleM"  
-"Four"                          "ruoF"  
-" One"                          " enO"  
-"My heart is in  the work"      "yM traeh si ni  eht krow"  
+"Carnegie Mellon" ->              "eigenraC nolleM"  
+"\tCarnegie  Mellon " ->          "\teigenraC  nolleM"  
+"Four" ->                         "ruoF"  
+" One" ->                         " enO"  
+"My heart is in  the work" ->     "yM traeh si ni  eht krow"  
 
 - Parameters:  
-  str        A null terminated string to reverse  
+  str :       A null terminated string to reverse  
 
 - Returns:  
   None  
@@ -63,16 +63,16 @@ __bool is_prefix(const char *prefix, const char *str)__
  * Note: empty string "" is a valid prefix for all strings.
 
 - Examples:  
-  prefix                     str                    Returns  
+  prefix                   | str                     | Returns  
 
-  C                          Carnegie Mellon        true  
-  Carnegie                   Carnegie Mellon        true  
-  Carnegie Mellon            Carnegie Mellon        true  
-  Cab                        Carnegie Mellon        false  
+  "C"                      | "Carnegie Mellon"       | true  
+  "Carnegie"               | "Carnegie Mellon"       | true  
+  "Carnegie Mellon"        | "Carnegie Mellon"       | true  
+  "Cab"                    | "Carnegie Mellon"       | false  
 
 - Parameters:  
-   str                      A null terminated string to examine  
-   prefix                   A null terminated string to check in front of str  
+   str :                     A null terminated string to examine  
+   prefix :                  A null terminated string to check in front of str  
 
 - Returns:  
     True if str begins with prefix, and false otherwise.  
