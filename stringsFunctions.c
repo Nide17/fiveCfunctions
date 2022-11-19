@@ -339,57 +339,66 @@ bool test_is_prefix()
 /*
  * An implementation of the remove_last_substr function
  *
- * Returns true if str begins with prefix, and false otherwise.
- * Both prefix and str are null-terminated strings.
- * Note: empty string "" is a valid prefix for all strings.
+ * Removes the last occurrence of substr from str,
+ * modifying the result in place.
+ * Returns the character position where the removal occurred,
+ * or -1 if substr was not found in str.
+ * Note that substr need not be a full word.
  *
  * Examples:
  *
- * prefix                  str                   Returns
- *
- * C                       Carnegie Mellon        true
- * Carnegie                Carnegie Mellon        true
- * Carnegie Mellon         Carnegie Mellon        true
- * Cab                     Carnegie Mellon        false
+ *  str                     substr                  Result                Returns
+ * "Carnegie Mellon"        "Carnegie"              "Mellon"              0
+ * "Carnegie Mellon"        "Kiltie"                "Carnegie Mellon"     -1
+ * "Carnegie Mellon"        ""                      "Carnegie Mellon"     14
+ * "one two one three"      "one "                  "one two three"       8
+ * "one two one three"      "hr"                    "one two one tee"     13
  *
  * Parameters:
  *   str                   A null terminated string to examine
- *   prefix                A null terminated string to check in front of str
+ *   substr                A null terminated string to remove
  *
  * Returns:
- *    True if str begins with prefix, and false otherwise.
+ *    Integer, which indicates the position where the substring was removed
  */
 int remove_last_substr(char *str, const char *substr)
 {
-
+    printf("Inside remove_last_substr");
+    return 0;
 }
 
 // #######################################################################
 /*
  * An implementation of the first_word function
  *
- * Returns true if str begins with prefix, and false otherwise.
- * Both prefix and str are null-terminated strings.
- * Note: empty string "" is a valid prefix for all strings.
+ * Returns the first word from input, removing leading whitespace
  *
  * Examples:
  *
- * prefix                  str                   Returns
+ * input                  Result (in word)       Returns
  *
- * C                       Carnegie Mellon        true
- * Carnegie                Carnegie Mellon        true
- * Carnegie Mellon         Carnegie Mellon        true
- * Cab                     Carnegie Mellon        false
+ * ␣␣␣echo␣                 echo                   7
+ * grep                    grep Mellon            4
+ * \techo␣one␣two␣three     echo                   5
+ * (empty string)          (empty string)         0
+ *  ␣␣                      (empty string)         2
+ * "one␣two"␣three          "one                   4
+ * One␣Two␣Three            One                    3
+ * function()␣one          function()             10
+ * ␣␣␣␣␣12.34                12.34                  10
  *
  * Parameters:
- *   str                   A null terminated string to examine
- *   prefix                A null terminated string to check in front of str
+ *   input                   A null terminated string to examine
+ *   word                    A null terminated word to work with
+ *   word_len                An integer for word's length
  *
  * Returns:
- *    True if str begins with prefix, and false otherwise.
+ *    Integer, which indicates the position where the space was removed
  */
 int first_word(const char *input, char *word, int word_len)
 {
+    printf("Inside first_word");
+    return 0;
 }
     // #######################################################################
     // THE PROGRAM EXECUTION STARTS FROM HERE
@@ -422,4 +431,8 @@ int first_word(const char *input, char *word, int word_len)
         printf("\nAll tests for is_prefix succeeded\n\n");
     else
         printf("\nTest failures for is_prefix occurred\n\n");
+
+    // TESTING THE remove_last_substr FUNCTION FUNCTION
+
+    // TESTING THE first_word FUNCTION FUNCTION
 }
