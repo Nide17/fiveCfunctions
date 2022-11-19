@@ -77,6 +77,64 @@ Parameters:
 Returns:  
     True if str begins with prefix, and false otherwise.  
 
+
+
+__int remove_last_substr(char *str, const char *substr)__ 
+
+An implementation of the remove_last_substr function  
+
+ * Removes the last occurrence of substr from str, modifying the result in place.
+ * Returns the character position where the removal occurred, or -1 if substr was not found in str.
+ * Note that substr need not be a full word.
+
+Examples:  
+
+    str                     | substr                  | Result                | Returns  
+ * "Carnegie Mellon"        | "Carnegie"              | "Mellon"              | 0  
+ * "Carnegie Mellon"        | "Kiltie"                | "Carnegie Mellon"     | -1  
+ * "Carnegie Mellon"        | ""                      | "Carnegie Mellon"     | 14  
+ * "one two one three"      | "one "                  | "one two three"       | 8  
+ * "one two one three"      | "hr"                    | "one two one tee"     | 13  
+
+Parameters:  
+   str                   A null terminated string to examine  
+   substr                A null terminated string to remove  
+
+Returns:  
+    Integer, which indicates the position where the substring was removed.    
+
+
+__int first_word(const char *input, char *word, int word_len)__ 
+
+Returns the first word from input, removing leading whitespace 
+
+ * Removes the last occurrence of substr from str, modifying the result in place.
+ * Returns the character position where the removal occurred, or -1 if substr was not found in str.
+ * Note that substr need not be a full word.
+
+Examples:  
+
+    input                  | Result (in word)       | Returns
+
+ * ␣␣␣echo␣                  | echo                   | 7
+ * grep                     | grep Mellon            | 4
+ * \techo␣one␣two␣three      | echo                   | 5
+ * (empty string)           |(empty string)          | 0
+ *  ␣␣                       | (empty string)         | 2
+ * "one␣two"␣three           | "one                   | 4
+ * One␣Two␣Three             | One                    | 3
+ * function()␣one            | function()             | 10
+ * ␣␣␣␣␣12.34                  | 12.34                  | 10
+
+Parameters:  
+    input                   A null terminated string to examine  
+    word                    A null terminated word to work with  
+    word_len                An integer for word's length  
+
+Returns:  
+    Integer, which indicates the position where the space was removed
+
+
 __IMPORTANCE__
 
 Someone may need to use these functions, when there is a need to manipulate strings o reven analyse them. this can be done via reversing the string characters or even reversing string words in place. These functions can also help in analysis of strings via searching various patterns in strings to make sure that it is the right string or even exploring large strings to know if particular information is included.
@@ -104,7 +162,7 @@ This program should be tested with the functions inside of it that have names st
 
  __KEYWORDS__
 
-   ILSE          CMU           Assignment3          stringFunctions           C Programming        Strings 
+<mark>ILSE</mark>     <mark>CMU</mark>     <mark>Assignment3</mark>     <mark>stringFunctions</mark>     <mark>C Programming</mark>     <mark>Strings</mark> 
 
 
 
