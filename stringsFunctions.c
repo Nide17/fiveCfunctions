@@ -336,8 +336,64 @@ bool test_is_prefix()
 }
 
 // #######################################################################
-// THE PROGRAM EXECUTION STARTS FROM HERE
-int main(int argc, char *argv[])
+/*
+ * An implementation of the remove_last_substr function
+ *
+ * Returns true if str begins with prefix, and false otherwise.
+ * Both prefix and str are null-terminated strings.
+ * Note: empty string "" is a valid prefix for all strings.
+ *
+ * Examples:
+ *
+ * prefix                  str                   Returns
+ *
+ * C                       Carnegie Mellon        true
+ * Carnegie                Carnegie Mellon        true
+ * Carnegie Mellon         Carnegie Mellon        true
+ * Cab                     Carnegie Mellon        false
+ *
+ * Parameters:
+ *   str                   A null terminated string to examine
+ *   prefix                A null terminated string to check in front of str
+ *
+ * Returns:
+ *    True if str begins with prefix, and false otherwise.
+ */
+int remove_last_substr(char *str, const char *substr)
+{
+
+}
+
+// #######################################################################
+/*
+ * An implementation of the first_word function
+ *
+ * Returns true if str begins with prefix, and false otherwise.
+ * Both prefix and str are null-terminated strings.
+ * Note: empty string "" is a valid prefix for all strings.
+ *
+ * Examples:
+ *
+ * prefix                  str                   Returns
+ *
+ * C                       Carnegie Mellon        true
+ * Carnegie                Carnegie Mellon        true
+ * Carnegie Mellon         Carnegie Mellon        true
+ * Cab                     Carnegie Mellon        false
+ *
+ * Parameters:
+ *   str                   A null terminated string to examine
+ *   prefix                A null terminated string to check in front of str
+ *
+ * Returns:
+ *    True if str begins with prefix, and false otherwise.
+ */
+int first_word(const char *input, char *word, int word_len)
+{
+}
+    // #######################################################################
+    // THE PROGRAM EXECUTION STARTS FROM HERE
+    int main(int argc, char *argv[])
 {
     // TESTING THE reverse_in_place FUNCTION FUNCTION
     bool success = true;
