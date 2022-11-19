@@ -22,9 +22,11 @@ An implementation of the reverse_in_place function.
  * Reverses a null-terminated string in place, converting it to all lower case in the process.
 
 Examples:  
- "Carnegie Mellon"	-> "nollem eigenrac"  
- "Four" ->             "ruof"  
- " One" ->             "eno "  
+| Input             | Output            |
+|-------------------|-------------------|
+| Carnegie Mellon | nollem eigenrac |
+| Four            | ruof            |
+|  One            | eno             |
 
 Parameters:  
   str :                A null terminated string to reverse  
@@ -41,11 +43,13 @@ An implementation of the reverse_by_word function
  * Whitespace characters (as identified by the C isspace() function) are passed through unchanged.
 
 Examples:  
-"Carnegie Mellon" ->              "eigenraC nolleM"  
-"\tCarnegie  Mellon " ->          "\teigenraC  nolleM"  
-"Four" ->                         "ruoF"  
-" One" ->                         " enO"  
-"My heart is in  the work" ->     "yM traeh si ni  eht krow"  
+| Input                      | Output                     |
+|----------------------------|----------------------------|
+| Carnegie Mellon          | eigenraC nolleM          |
+| \tCarnegie  Mellon       | \teigenraC  nolleM       |
+| Four                     | ruoF                     |
+|  One                     |  enO                     |
+| My heart is in  the work | yM traeh si ni  eht krow |
 
 Parameters:  
   str :       A null terminated string to reverse  
@@ -63,12 +67,12 @@ An implementation of the is_prefix function
  * Note: empty string "" is a valid prefix for all strings.
 
 Examples:  
-  prefix                   | str                     | Returns  
-
-  "C"                      | "Carnegie Mellon"       | true  
-  "Carnegie"               | "Carnegie Mellon"       | true  
-  "Carnegie Mellon"        | "Carnegie Mellon"       | true  
-  "Cab"                    | "Carnegie Mellon"       | false  
+| prefix            | str               | Returns |
+|-------------------|-------------------|---------|
+| C               | Carnegie Mellon | true    |
+| Carnegie        | Carnegie Mellon | true    |
+| Carnegie Mellon | Carnegie Mellon | true    |
+| Cab             | Carnegie Mellon | false   |
 
 Parameters:  
    str :                     A null terminated string to examine  
@@ -89,12 +93,15 @@ An implementation of the remove_last_substr function
 
 Examples:  
 
-    str                     | substr                  | Result                | Returns  
- * "Carnegie Mellon"        | "Carnegie"              | "Mellon"              | 0  
- * "Carnegie Mellon"        | "Kiltie"                | "Carnegie Mellon"     | -1  
- * "Carnegie Mellon"        | ""                      | "Carnegie Mellon"     | 14  
- * "one two one three"      | "one "                  | "one two three"       | 8  
- * "one two one three"      | "hr"                    | "one two one tee"     | 13  
+| str                   | substr     | Result            | Returns |
+|-----------------------|------------|-------------------|---------|
+| Carnegie Mellon   | Carnegie | Mellon          | 0       |
+| Carnegie Mellon   | Kiltie   | Carnegie Mellon | -1      |
+| Carnegie Mellon   |          | Carnegie Mellon | 14      |
+| one two one three | one      | one two three   | 8       |
+| one two one three | hr       | one two one tee | 13      |
+
+
 
 Parameters:  
    str                   A null terminated string to examine  
@@ -114,17 +121,17 @@ Returns the first word from input, removing leading whitespace
 
 Examples:  
 
-    input                  | Result (in word)       | Returns
-
- * ␣␣␣echo␣                  | echo                   | 7
- * grep                     | grep Mellon            | 4
- * \techo␣one␣two␣three      | echo                   | 5
- * (empty string)           |(empty string)          | 0
- *  ␣␣                       | (empty string)         | 2
- * "one␣two"␣three           | "one                   | 4
- * One␣Two␣Three             | One                    | 3
- * function()␣one            | function()             | 10
- * ␣␣␣␣␣12.34                  | 12.34                  | 10
+| input                  | Result (in word) | Returns |
+|------------------------|------------------|---------|
+|  ␣␣␣echo␣             | echo             | 7       |
+|  grep                 | grep Mellon      | 4       |
+|  \techo␣one␣two␣three | echo             | 5       |
+|  (empty string)       | (empty string)   | 0       |
+|   ␣␣                  | (empty string)   | 2       |
+|  "one␣two"␣three      | "one             | 4       |
+|  One␣Two␣Three        | One              | 3       |
+|  function()␣one       | function()       | 10      |
+|  ␣␣␣␣␣12.34           | 12.34            | 10      |
 
 Parameters:  
     input                   A null terminated string to examine  
