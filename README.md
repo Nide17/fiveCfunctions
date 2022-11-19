@@ -17,52 +17,52 @@ __DESCRIPTION__
 
 __void reverse_in_place(char *str)__ 
 
-- An implementation of the reverse_in_place function.
+An implementation of the reverse_in_place function.
 
  * Reverses a null-terminated string in place, converting it to all lower case in the process.
 
-- Examples:  
+Examples:  
  "Carnegie Mellon"	-> "nollem eigenrac"  
  "Four" ->             "ruof"  
  " One" ->             "eno "  
 
-- Parameters:  
+Parameters:  
   str :                A null terminated string to reverse  
 
-- Returns:  
+Returns:  
   None  
     
 
 __void reverse_by_word(char *str)__ 
 
-- An implementation of the reverse_by_word function
+An implementation of the reverse_by_word function
 
  * Individually reverses each word of a null-terminated string in place.
  * Whitespace characters (as identified by the C isspace() function) are passed through unchanged.
 
-- Examples:  
+Examples:  
 "Carnegie Mellon" ->              "eigenraC nolleM"  
 "\tCarnegie  Mellon " ->          "\teigenraC  nolleM"  
 "Four" ->                         "ruoF"  
 " One" ->                         " enO"  
 "My heart is in  the work" ->     "yM traeh si ni  eht krow"  
 
-- Parameters:  
+Parameters:  
   str :       A null terminated string to reverse  
 
-- Returns:  
+Returns:  
   None  
 
 
 __bool is_prefix(const char *prefix, const char *str)__ 
 
-- An implementation of the is_prefix function  
+An implementation of the is_prefix function  
 
  * Returns true if str begins with prefix, and false otherwise.
  * Both prefix and str are null-terminated strings.
  * Note: empty string "" is a valid prefix for all strings.
 
-- Examples:  
+Examples:  
   prefix                   | str                     | Returns  
 
   "C"                      | "Carnegie Mellon"       | true  
@@ -70,11 +70,11 @@ __bool is_prefix(const char *prefix, const char *str)__
   "Carnegie Mellon"        | "Carnegie Mellon"       | true  
   "Cab"                    | "Carnegie Mellon"       | false  
 
-- Parameters:  
+Parameters:  
    str :                     A null terminated string to examine  
    prefix :                  A null terminated string to check in front of str  
 
-- Returns:  
+Returns:  
     True if str begins with prefix, and false otherwise.  
 
 __IMPORTANCE__
