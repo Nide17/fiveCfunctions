@@ -86,6 +86,11 @@ __GETTING STARTED__
 
 - Clone this repository to get the stringFunctions.c program.
 - Run the stringFunctions.c program from its containing directory to get the better of it.
+- Note that the following header files needs to be included: 
+#include <stdio.h>   // for inputs and outputs  
+#include <stdbool.h> // for using booleans  
+#include <string.h>  // For using string functions  
+#include <ctype.h>   // declares a set of functions to classify (and transform) individual characters. - tolower  
 - Check if it has effects.
 - Happy exploration!!
 
