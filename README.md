@@ -21,16 +21,16 @@ __void reverse_in_place(char *str)__
 
  * Reverses a null-terminated string in place, converting it to all lower case in the process.
 
-- Examples:
- "Carnegie Mellon"	"nollem eigenrac"
- "Four"             "ruof"
- " One"             "eno "
+- Examples:  
+ "Carnegie Mellon"	"nollem eigenrac"  
+ "Four"             "ruof"  
+ " One"             "eno "  
 
-- Parameters:
-  str        A null terminated string to reverse
+- Parameters:  
+  str        A null terminated string to reverse  
 
-- Returns:
-  None
+- Returns:  
+  None  
     
 
 __void reverse_by_word(char *str)__ 
@@ -40,42 +40,42 @@ __void reverse_by_word(char *str)__
  * Individually reverses each word of a null-terminated string in place.
  * Whitespace characters (as identified by the C isspace() function) are passed through unchanged.
 
-- Examples:
-"Carnegie Mellon"               "eigenraC nolleM"
-"\tCarnegie  Mellon "           "\teigenraC  nolleM"
-"Four"                          "ruoF"
-" One"                          " enO"
-"My heart is in  the work"      "yM traeh si ni  eht krow"
+- Examples:  
+"Carnegie Mellon"               "eigenraC nolleM"  
+"\tCarnegie  Mellon "           "\teigenraC  nolleM"  
+"Four"                          "ruoF"  
+" One"                          " enO"  
+"My heart is in  the work"      "yM traeh si ni  eht krow"  
 
-- Parameters:
-  str        A null terminated string to reverse
+- Parameters:  
+  str        A null terminated string to reverse  
 
-- Returns:
-  None
+- Returns:  
+  None  
 
 
 __bool is_prefix(const char *prefix, const char *str)__ 
 
-- An implementation of the is_prefix function
+- An implementation of the is_prefix function  
 
  * Returns true if str begins with prefix, and false otherwise.
  * Both prefix and str are null-terminated strings.
  * Note: empty string "" is a valid prefix for all strings.
 
-- Examples:
-  prefix                     str                    Returns
+- Examples:  
+  prefix                     str                    Returns  
 
-  C                          Carnegie Mellon        true
-  Carnegie                   Carnegie Mellon        true
-  Carnegie Mellon            Carnegie Mellon        true
-  Cab                        Carnegie Mellon        false
+  C                          Carnegie Mellon        true  
+  Carnegie                   Carnegie Mellon        true  
+  Carnegie Mellon            Carnegie Mellon        true  
+  Cab                        Carnegie Mellon        false  
 
-- Parameters:
-   str                      A null terminated string to examine
-   prefix                   A null terminated string to check in front of str
+- Parameters:  
+   str                      A null terminated string to examine  
+   prefix                   A null terminated string to check in front of str  
 
-- Returns:
-    True if str begins with prefix, and false otherwise.
+- Returns:  
+    True if str begins with prefix, and false otherwise.  
 
 __IMPORTANCE__
 
