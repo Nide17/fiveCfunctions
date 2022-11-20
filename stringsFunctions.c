@@ -529,7 +529,6 @@ bool test_remove_last_substr()
  */
 int first_word(const char *input, char *word, int word_len)
 {
-    word[word_len]; // word points to a buffer of word_len length
     int index = 0, k = 0, processed = 0;
 
     // LOOP THE STRING, SKIPPING LEADING WHITESPACES
@@ -546,12 +545,10 @@ int first_word(const char *input, char *word, int word_len)
     // ADDING THE END OF LINE '\0'
     word[k] = '\0';
 
+    // PROCESSED CHARS = SKIPPED leading whitespaces + LENGTH OF word
     processed = k + index;
-    // printf("Processed %d characters from input\n", processed);
-    // printf("%s\n", word);
     return processed;
 }
-
 /*
  * Tests the first_word function, once
  *
@@ -564,19 +561,16 @@ int first_word(const char *input, char *word, int word_len)
  *   Returns the character position where the removal occurred, or -1 if substr was not found in str.
  */
 
-bool test_first_word_once(const char *input, char *word, int expected)
+bool test_first_word_once(const char *input, int expected)
 {
-    int word_len = 8;
-    char bufferMemory[word_len];
-    word[word_len];
+    char word[128];
 
-        strcpy(bufferMemory, input);
-
-    if (first_word(bufferMemory, word, word_len) != expected)
+    if (first_word(input, word, sizeof(word)) != expected)
     {
-        printf("\nTest error: Getting the first word from '%s' gives '%s' expecting to return '%d' but returned '%d'\n", bufferMemory, word, expected, first_word(bufferMemory, word, word_len));
+        printf("\nTest error: Getting the first word from '%s' gives '%s' expecting to return '%d' but returned '%d'\n", input, word, expected, first_word(input, word, sizeof(word)));
         return false;
     }
+
     else
     {
         return true;
@@ -589,35 +583,45 @@ bool test_first_word_once(const char *input, char *word, int expected)
  * Returns:
  *   True if all tests succeed, false otherwise
  */
+
 bool test_first_word()
 {
     bool success = true;
 
-    if (!test_first_word_once("grep", "grep", 4))
+    const char *input = "grep";
+    if (!test_first_word_once(input, 4))
         success = false;
 
-    if (!test_first_word_once("   echo ", "echo", 7))
+    input = "   echo ";
+    if (!test_first_word_once(input, 7))
         success = false;
 
-    if (!test_first_word_once(" echo one two three", "echo ", 5))
+    input = " echo one two three";
+    if (!test_first_word_once(input, 5))
         success = false;
 
-    if (!test_first_word_once("", "", 0))
+    input = "";
+    if (!test_first_word_once(input, 0))
         success = false;
 
-    if (!test_first_word_once("  ", "", 2))
+    input = "  ";
+    if (!test_first_word_once(input, 2))
         success = false;
 
-    // if (!test_first_word_once("\"one two\" three", '"one', 4))
-    //     success = false;
-
-    if (!test_first_word_once("One Two Three", "One", 3))
+    input = "\"one two\" three";
+    if (!test_first_word_once(input, 4))
         success = false;
 
-    if (!test_first_word_once("function() one", "function() ", 10))
+    input = "One Two Three";
+    if (!test_first_word_once(input, 3))
         success = false;
 
-    if (!test_first_word_once("     12.34", "12.34", 10))
+    input = "function() one";
+    if (!test_first_word_once(input, 10))
+        success = false;
+
+    input = "     12.34";
+    if (!test_first_word_once(input, 10))
         success = false;
 
     return success;
