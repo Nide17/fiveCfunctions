@@ -557,8 +557,8 @@ int first_word(const char *input, char *word, int word_len)
 
 bool test_first_word_once(const char *input, char *word, int expected)
 {
-    char bufferMemory[512];
-    int word_len;
+    int word_len = 512;
+    char bufferMemory[word_len];
 
     strcpy(bufferMemory, input);
 
