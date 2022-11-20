@@ -298,10 +298,12 @@ bool is_prefix(const char *prefix, const char *str)
 
 bool test_is_prefix_once(const char *prefix, const char *str, bool expected)
 {
-    if(is_prefix(prefix, str) != expected) 
+
+    // CONSIDER USING BUFFER AS WELL?
+    if (is_prefix(prefix, str) != expected)
     {
-        printf("\nTest error: checking prefix '%s' in '%s' returned '%d', expected '%d'\n", 
-                prefix, str, is_prefix(prefix, str), expected);
+        printf("\nTest error: checking prefix '%s' in '%s' returned '%d', expected '%d'\n",
+               prefix, str, is_prefix(prefix, str), expected);
         return false;
     }
     else
@@ -320,7 +322,22 @@ bool test_is_prefix()
 {
     bool success = true;
 
-    if (!test_is_prefix_once("C", "Carnegie Mellon", true)) 
+    if (!test_is_prefix_once("log", "Parallellogram", false))
+        success = false;
+
+    if (!test_is_prefix_once("P", "Parallellogram", true))
+        success = false;
+
+    if (!test_is_prefix_once("[", "[Parallellogram", true))
+        success = false;
+
+    if (!test_is_prefix_once("", "Parallellogram", true))
+        success = false;
+
+    if (!test_is_prefix_once(" ", "Parallellogram", false))
+        success = false;
+
+    if (!test_is_prefix_once("", " Parallellogram", true))
         success = false;
 
     if (!test_is_prefix_once("Carnegie", "Carnegie Mellon", true))
@@ -363,8 +380,122 @@ bool test_is_prefix()
  */
 int remove_last_substr(char *str, const char *substr)
 {
-    printf("Inside remove_last_substr");
-    return 0;
+    // VARS DECLARATION
+    int position, exist;
+    int lenStr = 0, lenSubStr = 0;
+
+    // STRING BUFFERS(string and substring)
+    char strin[512];
+    char subStr[512];
+
+    // FINDING THE LENGTH OF THE string AND COPYING THE PROVIDED str TO strin BUFFER TO BE USED
+    for (int c = 0; str[c] != '\0'; c++)
+    {
+        lenStr = c + 1;
+        strin[c] = str[c];
+    }
+
+    // THE LENGTH OF THE substring AND COPYING THE PROVIDED substr TO subStr BUFFER TO BE USED
+    for (int c = 0; substr[c] != '\0'; c++)
+    {
+        lenSubStr = c + 1;
+        subStr[c] = substr[c];
+    }
+
+    // LOOPING FROM THE START TO END OF string (lenSubStr)
+    // TRYING TO MATCH THE substr TO str FROM THE BACK
+    position = -1; // START AT FALSE
+    for (int i = 0; i < lenStr - lenSubStr; i++)
+    {
+        // MATCH subStr AT THIS POSITION
+        exist = 1; // START TRUE
+        for (int j = 0; j < lenSubStr; j++)
+        {
+            // IF subStr NOT FOUND
+            if (strin[i + j] != subStr[j])
+            {
+                exist = 0;
+                break;
+            }
+        }
+
+        // IF subStr EXIST, UPDATE THE POSITION
+        if (exist == 1)
+            position = i;
+    }
+
+    if (position != -1)
+    {
+        // SHIFT CHARS TO THE LEFT
+        for (int i = position; i <= lenStr - lenSubStr; i++)
+            strin[i] = strin[i + lenSubStr];
+    }
+
+    return position;
+}
+
+/*
+ * Tests the remove_last_substr function, once
+ *
+ * Parameters:
+ *   input      The string to pass to remove_last_substr
+ *   substr     The string to pass to remove_last_substr to be removed
+ *   expected   The integer expected to be returned by remove_last_substr
+ *
+ * Returns:
+ *   Returns the character position where the removal occurred, or -1 if substr was not found in str.
+ */
+
+bool test_remove_last_substr_once(char *input, const char *substr, int expected)
+{
+    char bufferMemory[512];
+
+    strcpy(bufferMemory, input);
+
+    if (remove_last_substr(bufferMemory, substr) != expected)
+    {
+        printf("\nTest error: removing '%s', from '%s', gives '%s', expected to be removed at position '%d' instead removed at '%d\n",
+               substr, input, bufferMemory, expected, remove_last_substr(bufferMemory, substr));
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
+
+/*
+ * Performs unit tests of the remove_last_substr functions
+ *
+ * Returns:
+ *   True if all tests succeed, false otherwise
+ */
+bool test_remove_last_substr()
+{
+    bool success = true;
+
+    if (!test_remove_last_substr_once("Parallellogram", "l", 8))
+        success = false;
+
+    if (!test_remove_last_substr_once("Parallellogram", "ll", 7))
+        success = false;
+
+    if (!test_remove_last_substr_once("Carnegie Mellon", "Carnegie ", 0))
+        success = false;
+
+    if (!test_remove_last_substr_once("Carnegie Mellon", "Kiltie", -1))
+        success = false;
+
+    if (!test_remove_last_substr_once("Carnegie Mellon", "", 14))
+        success = false;
+
+    if (!test_remove_last_substr_once("one two one three", "one ", 8))
+        success = false;
+
+    if (!test_remove_last_substr_once("one two one three", "hr", 13))
+        success = false;
+
+    return success;
 }
 
 // #######################################################################
@@ -400,9 +531,9 @@ int first_word(const char *input, char *word, int word_len)
     printf("Inside first_word");
     return 0;
 }
-    // #######################################################################
-    // THE PROGRAM EXECUTION STARTS FROM HERE
-    int main(int argc, char *argv[])
+// #######################################################################
+// THE PROGRAM EXECUTION STARTS FROM HERE
+int main(int argc, char *argv[])
 {
     // TESTING THE reverse_in_place FUNCTION FUNCTION
     bool success = true;
@@ -410,29 +541,41 @@ int first_word(const char *input, char *word, int word_len)
         success = false;
 
     if (success)
-        printf("All tests for reverse_in_place succeeded\n");
+        printf("All tests for reverse_in_place succeeded\n\n");
     else
-        printf("Test failures for reverse_in_place occurred\n");
+        printf("Test failures for reverse_in_place occurred\n\n");
 
     // TESTING THE reverse_by_word FUNCTION FUNCTION
     if (!test_reverse_by_word())
         success = false;
 
     if (success)
-        printf("\nAll tests for reverse_by_word succeeded\n\n");
+        printf("All tests for reverse_by_word succeeded\n\n");
     else
-        printf("\nTest failures for reverse_by_word occurred\n\n");
+        printf("Test failures for reverse_by_word occurred\n\n");
 
     // TESTING THE is_prefix FUNCTION FUNCTION
     if (!test_is_prefix())
         success = false;
 
     if (success)
-        printf("\nAll tests for is_prefix succeeded\n\n");
+        printf("All tests for is_prefix succeeded\n\n");
     else
-        printf("\nTest failures for is_prefix occurred\n\n");
+        printf("Test failures for is_prefix occurred\n\n");
 
     // TESTING THE remove_last_substr FUNCTION FUNCTION
+    if (!test_remove_last_substr())
+        success = false;
+
+    if (success)
+        printf("All tests for remove_last_substr succeeded\n\n");
+    else
+        printf("Test failures for remove_last_substr occurred\n\n");
 
     // TESTING THE first_word FUNCTION FUNCTION
 }
+
+/*
+ * REFERENCES
+ * 1. https://codeforwin.org/2016/04/c-program-to-remove-last-occurrence-of-word-in-string.html
+ */
