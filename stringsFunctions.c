@@ -153,6 +153,7 @@ void reverse_by_word(char *str)
 
     while (str[end] != '\0')
     {
+        // MOVING THE POINTER end TO THE LAST LETTER
         for (end = start; str[end] && !isspace(str[end]); end++)
             ;
 
@@ -528,8 +529,88 @@ bool test_remove_last_substr()
  */
 int first_word(const char *input, char *word, int word_len)
 {
-    printf("Inside first_word");
-    return 0;
+    char wordBuffer[word_len]; // buffer of word_len length
+    // *word = wordBuffer[word_len]; // word points to a buffer of word_len length
+    strcpy(wordBuffer, word);
+    int processed = 0;
+    int start, end;
+    end = 0;
+    start = 0;
+
+    for (end = start; wordBuffer[end] && !isspace(wordBuffer[end]); end++)
+        processed++;
+
+    return processed;
+}
+
+/*
+ * Tests the first_word function, once
+ *
+ * Parameters:
+ *   input      The string to pass to first_word
+ *   substr     The string to pass to first_word to be removed
+ *   expected   The integer expected to be returned by first_word
+ *
+ * Returns:
+ *   Returns the character position where the removal occurred, or -1 if substr was not found in str.
+ */
+
+bool test_first_word_once(const char *input, char *word, int expected)
+{
+    char bufferMemory[512];
+    int word_len;
+
+    strcpy(bufferMemory, input);
+
+    if (first_word(bufferMemory, word, word_len) != expected)
+    {
+        printf("\nTest error: Getting the first word from '%s' gives '%s' expecting to return '%d' but returned '%d'\n", bufferMemory, word, expected, first_word(bufferMemory, word, word_len));
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
+
+/*
+ * Performs unit tests of the first_word functions
+ *
+ * Returns:
+ *   True if all tests succeed, false otherwise
+ */
+bool test_first_word()
+{
+    bool success = true;
+
+    if (!test_first_word_once("grep", "grep", 4))
+        success = false;
+
+    if (!test_first_word_once("   echo ", "echo", 7))
+        success = false;
+
+    if (!test_first_word_once(" echo one two three", "echo ", 5))
+        success = false;
+
+    if (!test_first_word_once("", "", 0))
+        success = false;
+
+    if (!test_first_word_once("  ", "", 2))
+        success = false;
+
+    // if (!test_first_word_once("\"one two\" three", '"one', 4))
+    //     success = false;
+
+    if (!test_first_word_once("One Two Three", "One", 3))
+        success = false;
+
+    if (!test_first_word_once("function() one", "function() ", 10))
+        success = false;
+
+    if (!test_first_word_once("     12.34", "12.34", 10))
+        success = false;
+
+    return success;
 }
 // #######################################################################
 // THE PROGRAM EXECUTION STARTS FROM HERE
@@ -573,6 +654,13 @@ int main(int argc, char *argv[])
         printf("Test failures for remove_last_substr occurred\n\n");
 
     // TESTING THE first_word FUNCTION FUNCTION
+    if (!test_first_word())
+        success = false;
+
+    if (success)
+        printf("All tests for first_word succeeded\n\n");
+    else
+        printf("Test failures for first_word occurred\n\n");
 }
 
 /*
