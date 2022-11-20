@@ -531,7 +531,13 @@ int first_word(const char *input, char *word, int word_len)
 {
     char wordBuffer[word_len]; // buffer of word_len length
     // *word = wordBuffer[word_len]; // word points to a buffer of word_len length
-    strcpy(wordBuffer, word);
+
+    // FINDING THE LENGTH OF THE word AND COPYING THE TO BUFFER
+    for (int c = 0; word[c] != '\0'; c++)
+    {
+        wordBuffer[c] = word[c];
+    }
+    
     int processed = 0;
     int start, end;
     end = 0;
