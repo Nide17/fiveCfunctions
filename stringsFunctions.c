@@ -80,9 +80,7 @@ bool test_reverse_in_place_once(char *input, char *expected)
     }
 
     else
-    {
         return true;
-    }
 }
 
 /*
@@ -197,9 +195,7 @@ bool test_reverse_by_word_once(char *input, char *expected)
         return false;
     }
     else
-    {
         return true;
-    }
 }
 
 /*
@@ -261,9 +257,7 @@ bool is_prefix(const char *prefix, const char *str)
 
     // IF THE PREFIX IS NOT SPECIFIED(NOT A NBR), true - *prefix: DEREFERENCED TO GET THE ACTUAL VALUE IN MEMORY
     if (!*prefix)
-    {
         return true;
-    }
 
     // WORKING THROUGH BOTH string AND prefix
     // INCREMENT BOTH prefix AND string, THEN COMPARE THEM UNTIL THE END
@@ -271,16 +265,12 @@ bool is_prefix(const char *prefix, const char *str)
     {
         // IF THE CURRENT chars DO NOT MATCH WITH prefix, false
         if (preCount != strCount)
-        {
             return false;
-        }
     }
 
     // IF THE string PROVIDED IS LESS THAN PREFIX, false
     if (!strCount)
-    {
         return false;
-    }
 
     // IF ALL THE ABOVE CONDITIONS ARE NOT MET, true
     return true;
@@ -308,9 +298,7 @@ bool test_is_prefix_once(const char *prefix, const char *str, bool expected)
         return false;
     }
     else
-    {
         return true;
-    }
 }
 
 /*
@@ -460,9 +448,7 @@ bool test_remove_last_substr_once(char *input, const char *substr, int expected)
         return false;
     }
     else
-    {
         return true;
-    }
 }
 
 /*
@@ -572,9 +558,7 @@ bool test_first_word_once(const char *input, int expected)
     }
 
     else
-    {
         return true;
-    }
 }
 
 /*
