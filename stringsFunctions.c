@@ -529,23 +529,26 @@ bool test_remove_last_substr()
  */
 int first_word(const char *input, char *word, int word_len)
 {
-    char wordBuffer[word_len]; // buffer of word_len length
-    // *word = wordBuffer[word_len]; // word points to a buffer of word_len length
+    word[word_len]; // word points to a buffer of word_len length
+    int index = 0, k = 0, processed = 0;
 
-    // FINDING THE LENGTH OF THE word AND COPYING THE TO BUFFER
-    for (int c = 0; word[c] != '\0'; c++)
+    // LOOP THE STRING, SKIPPING LEADING WHITESPACES
+    while (isspace(input[index]))
+        index++;
+
+    // LOOP STARTING FROM INDEX(spaces ignored) UNTIL string ENDS '\0' OR MEET SPACE, THEN COPY CONTENT TO word
+    for (int j = index; input[j] != '\0' && !(isspace(input[j])); j++)
     {
-        wordBuffer[c] = word[c];
+        // COPYING THE first word FROM input INTO THE word BUFFER
+        word[k] = input[j];
+        k++;
     }
-    
-    int processed = 0;
-    int start, end;
-    end = 0;
-    start = 0;
+    // ADDING THE END OF LINE '\0'
+    word[k] = '\0';
 
-    for (end = start; wordBuffer[end] && !isspace(wordBuffer[end]); end++)
-        processed++;
-
+    processed = k + index;
+    // printf("Processed %d characters from input\n", processed);
+    // printf("%s\n", word);
     return processed;
 }
 
@@ -563,10 +566,11 @@ int first_word(const char *input, char *word, int word_len)
 
 bool test_first_word_once(const char *input, char *word, int expected)
 {
-    int word_len = 512;
+    int word_len = 8;
     char bufferMemory[word_len];
+    word[word_len];
 
-    strcpy(bufferMemory, input);
+        strcpy(bufferMemory, input);
 
     if (first_word(bufferMemory, word, word_len) != expected)
     {
