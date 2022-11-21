@@ -39,21 +39,27 @@
 
 void reverse_in_place(char *str)
 {
-    int f = 0;
-    int b = 0;
+    int f = 0, b = 0, j = 0;
     char temp;
 
+    int lenStr = 0;
+
+    // FINDING THE LENGTH OF THE string AND COPYING THE PROVIDED str TO strin BUFFER TO BE USED
     for (b = 0; str[b] != '\0'; ++b)
-        ;
+        lenStr = b + 1;
 
     --b;
 
     while (f < b)
     {
-        temp = tolower(str[b]);
-        str[b--] = tolower(str[f]);
+        temp = str[b];
+        str[b--] = str[f];
         str[f++] = temp;
     }
+
+    // LOWERCASE
+    for (j = 0; j < lenStr; j++)
+        str[j] = tolower(str[j]);
 }
 
 /*
@@ -370,59 +376,52 @@ bool test_is_prefix()
 int remove_last_substr(char *str, const char *substr)
 {
     // VARS DECLARATION
-    int position, exist;
-    int lenStr = 0, lenSubStr = 0;
+    int position;
+    int n = 0;
 
-    // STRING BUFFERS(string and substring)
-    char strin[512];
-    char subStr[512];
+    int lenStr = 0;
+    int lenSubStr = 0;
 
     // FINDING THE LENGTH OF THE string AND COPYING THE PROVIDED str TO strin BUFFER TO BE USED
     for (int c = 0; str[c] != '\0'; c++)
-    {
         lenStr = c + 1;
-        strin[c] = str[c];
-    }
 
     // THE LENGTH OF THE substring AND COPYING THE PROVIDED substr TO subStr BUFFER TO BE USED
     for (int c = 0; substr[c] != '\0'; c++)
-    {
         lenSubStr = c + 1;
-        subStr[c] = substr[c];
-    }
 
     // LOOPING FROM THE START TO END OF string (lenSubStr)
     // TRYING TO MATCH THE substr TO str FROM THE BACK
     position = -1; // START AT FALSE
-    for (int i = 0; i < lenStr - lenSubStr; i++)
+
+    for (int i = 0; i < lenStr; i++)
     {
-        // MATCH subStr AT THIS POSITION
-        exist = 1; // START TRUE
-        for (int j = 0; j < lenSubStr; j++)
+        if (str[i] == substr[n])
         {
-            // IF subStr NOT FOUND
-            if (strin[i + j] != subStr[j])
+            n++;
+
+            if (n == lenSubStr)
             {
-                exist = 0;
-                break;
+                position = i - lenSubStr + 1;
+                n = 0;
             }
         }
-
-        // IF subStr EXIST, UPDATE THE POSITION
-        if (exist == 1)
-            position = i;
+        else
+            n = 0;
     }
 
     if (position != -1)
     {
-        // SHIFT CHARS TO THE LEFT
-        for (int i = position; i <= lenStr - lenSubStr; i++)
-            strin[i] = strin[i + lenSubStr];
+        int i = position;
+        while (i < lenStr)
+        {
+            str[i] = str[i + lenSubStr];
+            i++;
+        }
     }
 
     return position;
 }
-
 /*
  * Tests the remove_last_substr function, once
  *
@@ -434,23 +433,22 @@ int remove_last_substr(char *str, const char *substr)
  * Returns:
  *   Returns the character position where the removal occurred, or -1 if substr was not found in str.
  */
-
-bool test_remove_last_substr_once(char *input, const char *substr, int expected)
+bool test_remove_last_substr_once(char *str, const char *substr, char *expecStr, int expecPos)
 {
-    char bufferMemory[512];
+    char buffer[512];
+    strcpy(buffer, str);
 
-    strcpy(bufferMemory, input);
+    int position = remove_last_substr(buffer, substr);
 
-    if (remove_last_substr(bufferMemory, substr) != expected)
+    if (strcmp(buffer, expecStr) != 0 || position != expecPos)
     {
-        printf("\nTest error: removing '%s', from '%s', gives '%s', expected to be removed at position '%d' instead removed at '%d\n",
-               substr, input, bufferMemory, expected, remove_last_substr(bufferMemory, substr));
+        printf("\nTest error: removing '%s', from '%s', gives '%s', expected '%s' to be removed at position '%d' instead removed at '%d\n",
+               substr, str, buffer, expecStr, expecPos, position);
         return false;
     }
     else
         return true;
 }
-
 /*
  * Performs unit tests of the remove_last_substr functions
  *
@@ -460,31 +458,26 @@ bool test_remove_last_substr_once(char *input, const char *substr, int expected)
 bool test_remove_last_substr()
 {
     bool success = true;
-
-    if (!test_remove_last_substr_once("Parallellogram", "l", 8))
+    if (!test_remove_last_substr_once("Carnegie Mellon", "Carnegie", " Mellon", 0))
         success = false;
 
-    if (!test_remove_last_substr_once("Parallellogram", "ll", 7))
+    if (!test_remove_last_substr_once("one two one three", "hr", "one two one tee", 13))
         success = false;
 
-    if (!test_remove_last_substr_once("Carnegie Mellon", "Carnegie ", 0))
+    if (!test_remove_last_substr_once("Parallellogram", "l", "Parallelogram", 8))
         success = false;
 
-    if (!test_remove_last_substr_once("Carnegie Mellon", "Kiltie", -1))
+    if (!test_remove_last_substr_once("Carnegie Mellon", "Kiltie", "Carnegie Mellon", -1))
         success = false;
 
-    if (!test_remove_last_substr_once("Carnegie Mellon", "", 14))
+    if (!test_remove_last_substr_once("Parallellogram", "ll", "Paralleogram", 7))
         success = false;
 
-    if (!test_remove_last_substr_once("one two one three", "one ", 8))
-        success = false;
-
-    if (!test_remove_last_substr_once("one two one three", "hr", 13))
+    if (!test_remove_last_substr_once("one two one three", "one ", "one two three", 8))
         success = false;
 
     return success;
 }
-
 // #######################################################################
 /*
  * An implementation of the first_word function
@@ -535,6 +528,7 @@ int first_word(const char *input, char *word, int word_len)
     processed = k + index;
     return processed;
 }
+
 /*
  * Tests the first_word function, once
  *
